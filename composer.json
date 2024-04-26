@@ -9,6 +9,7 @@
     "homepage": "https://github.com/sparkouttech/bug-atlas",
     "license": "MIT",
     "minimum-stability": "dev",
+    "prefer-stable": true,
     "type": "library",
     "authors": [
         {
