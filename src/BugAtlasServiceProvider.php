@@ -20,11 +20,7 @@ class BugAtlasServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-            $this->publishes([
-                __DIR__ . '/config/bugatlas.php' => config_path('bugatlas.php'),
-            ], 'config');
-            $this->mergeConfigFrom(__DIR__.'/config/bugatlas.php', 'bugatlas');     
-        
+        $this->mergeConfigFrom(__DIR__ . '/config/bugatlas.php', 'bugatlas');
     }
 
     /**
@@ -35,15 +31,23 @@ class BugAtlasServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
+        $this->publishes([
+            __DIR__ . '/config/bugatlas.php' => config_path('bugatlas.php'),
+        ], 'config');
+
         $logDetails = $this->prepareLogDetails($request);
         $this->sendLogToApi($logDetails);
     }
 
     /**
-     * Prepare log details.
+     * Prepare log details for a given HTTP request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array
+     * This function extracts relevant details from the request and response
+     * to prepare a log entry. It collects headers, fetches additional data
+     * from the server, and formats them into an array.
+     *
+     * @param Request $request The HTTP request object containing request details.
+     * @return array An array containing various details for logging.
      */
     private function prepareLogDetails(Request $request)
     {
@@ -72,10 +76,14 @@ class BugAtlasServiceProvider extends ServiceProvider
     }
 
     /**
-     * Send log to API.
+     * Send log details to the API for storage.
      *
-     * @param  array  $logDetails
-     * 
+     * This function prepares a structured payload containing various log details
+     * and sends it to the specified API endpoint for storage. It constructs the
+     * payload based on the provided log details and additional metadata.
+     *
+     * @param array $logDetails An array containing various log details to be sent to the API.
+     * @return void
      */
     private function sendLogToApi($logDetails)
     {
