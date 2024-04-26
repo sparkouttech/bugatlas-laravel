@@ -20,11 +20,15 @@ class BugAtlasServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__ . '/config/bugatlas.php' => config_path('bugatlas.php'),
             ], 'config');
-        }
+            $this->mergeConfigFrom(
+                __DIR__.'/../Config/bugatlas.php',
+                'bugatlas'
+            );
+    
+        
         
     }
 
