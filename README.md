@@ -13,6 +13,25 @@ You can install the package via composer:
 ```bash
 composer require sparkouttech/bug-atlas
 ```
+You can publish the config file with:
+
+```
+php artisan vendor:publish --provider="Sparkouttech\\BugAtlas\\BugAtlasServiceProvider" --tag="config"
+```
+This is the contents of the published config file:
+```
+<?php
+
+/*
+ * You can place your custom package configuration in here.
+ */
+return [
+
+    'api_key' => env('API_KEY'),
+    'secret_key' => env('SECRET_KEY'),
+    'tag' => env('TAG'),
+];
+```
 
 ## Usage
 

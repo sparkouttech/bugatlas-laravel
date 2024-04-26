@@ -53,11 +53,10 @@ class BugAtlasServiceProvider extends ServiceProvider
         $response = Http::get(config("app.url"));
 
         // Log the details
-        // TODO: work on time
         return [
             "protocol" => $request->server("SERVER_PROTOCOL"),
             "request_url" => $request->fullUrl(),
-            "time" => Carbon::now()->format("F jS Y, h:i:s A"),
+            "time" => (new DateTime())->format("F jS Y, h:i:s"),
             "host_name" => gethostname(),
             "method" => $request->method(),
             "path" => $request->path(),
