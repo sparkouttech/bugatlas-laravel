@@ -3,10 +3,10 @@
 namespace Sparkouttech\BugAtlas;
 
 use Illuminate\Support\ServiceProvider;
-use Sparkouttech\BugAtlas\Services\ExceptionHandlingService;
+use Sparkouttech\BugAtlas\Services\BugAtlasExceptionHandlingService;
 use Sparkouttech\BugAtlas\Services\BugAtlasReporterService;
 
-class ExceptionServiceProvider extends ServiceProvider
+class BugAtlasExceptionServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
@@ -14,7 +14,7 @@ class ExceptionServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app->bind('Illuminate\Contracts\Debug\ExceptionHandler', function ($app) {
-            return new ExceptionHandlingService($app, new BugAtlasReporterService());
+            return new BugAtlasExceptionHandlingService($app, new BugAtlasReporterService());
         });
     }
 }
