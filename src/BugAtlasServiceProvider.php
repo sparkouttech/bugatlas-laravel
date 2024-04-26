@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Providers;
-namespace Sparkouttech\BugAtlas\Traits;
+namespace Sparkouttech\BugAtlas;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
+use Sparkouttech\BugAtlas\Traits\ApiBugAtlas;
 
 class BugAtlasServiceProvider extends ServiceProvider
 {
