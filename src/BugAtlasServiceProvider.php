@@ -23,12 +23,7 @@ class BugAtlasServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__ . '/config/bugatlas.php' => config_path('bugatlas.php'),
             ], 'config');
-            $this->mergeConfigFrom(
-                __DIR__.'/../Config/bugatlas.php',
-                'bugatlas'
-            );
-    
-        
+            $this->mergeConfigFrom(__DIR__.'/config/bugatlas.php', 'bugatlas');     
         
     }
 
