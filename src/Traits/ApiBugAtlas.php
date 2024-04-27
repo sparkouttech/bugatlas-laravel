@@ -12,9 +12,7 @@ trait ApiBugAtlas
 
     public function processApiResponse($endPoint, $body)
     {
-        $response = Http::withHeaders($this->getApiHeaders())->post($this->baseURL . $endPoint, $body);
-        return $response;
-        
+         return Http::withHeaders($this->getApiHeaders())->post($this->baseURL . $endPoint, $body);
     }
 
 

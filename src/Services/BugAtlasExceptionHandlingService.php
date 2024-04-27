@@ -39,12 +39,9 @@ class BugAtlasExceptionHandlingService extends BaseHandler
     {
         // Check if the exception should be handled by BugAtlas
         if ($this->shouldHandleException($exception)) {
-            // Report the exception to BugAtlas
+            // Report the exception to BugAtlas for monitoring and debugging purposes
             $this->bugAtlasReporter->report($request, $exception);
         }
-
-        // Let the parent handler render the exception
-        return parent::render($request, $exception);
     }
 
     /**
@@ -56,50 +53,6 @@ class BugAtlasExceptionHandlingService extends BaseHandler
 
     protected function shouldHandleException(Throwable $exception): bool
     {
-        // Get the class name of the exception
-        $exceptionName = get_class($exception);
-
-        // Check if the exception should be handled based on its class name
-        switch($exceptionName){
-            // List of exceptions to be handled by BugAtlas
-            case "SyntaxError":
-            case "TypeError":
-            case "FileNotFoundError":
-            case "AttributeError":
-            case "ZeroDivisionError":
-            case "ValidationException":
-            case "ModelNotFoundException":
-            case "MethodNotAllowedHttpException":
-            case "NotFoundHttpException":
-            case "QueryException":
-            case "AuthorizationException":
-            case "AuthenticationException":
-            case "FileNotFoundException":
-            case "HttpException":
-            case "TokenMismatchException":
-            case "ServiceNotFoundException":
-            case "ThrottleRequestsException":
-            case "BadMethodCallException":
-            case "PDOException":
-            case "ConnectException":
-            case "PermissionDeniedException":
-            case "ReflectionException":
-            case "BindingResolutionException": 
-            case "InvalidArgumentException":
-            case "OutOfBoundsException":
-            case "ConnectionException":
-            case "ErrorException":        
-            case "SuspiciousOperationException":
-            case "FatalThrowableError":
-            case "RuntimeException":
-
-            // Return true if the exception should be handled
-            return true;
-            break;
-            
-            // Default case: return false if the exception should not be handled
-            default:
-            return false;
-        }
+        return true;
     }
 }
