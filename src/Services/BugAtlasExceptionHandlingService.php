@@ -42,6 +42,7 @@ class BugAtlasExceptionHandlingService extends BaseHandler
             // Report the exception to BugAtlas for monitoring and debugging purposes
             $this->bugAtlasReporter->report($request, $exception);
         }
+        return parent::render($request, $exception);
     }
 
     /**

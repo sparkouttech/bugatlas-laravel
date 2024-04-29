@@ -15,7 +15,7 @@ class BugAtlasServiceProvider extends ServiceProvider
          * Optional methods to load your package assets
          */
         $this->publishes([
-            __DIR__ . '/config/bugatlas.php' => config_path('bugatlas.php'),
+            __DIR__ . '/../config/bugatlas.php' => config_path('bugatlas.php'),
         ], 'config');
     }
 
