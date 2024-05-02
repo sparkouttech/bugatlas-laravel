@@ -41,8 +41,8 @@ trait ApiBugAtlas
     private function getApiHeaders()
     {
         return [
-            'api_key' => config('bugatlas.api_key'),
-            'secret_key' => config('bugatlas.secret_key'),
+            'api_key' => env('API_KEY'),
+            'secret_key' => env('SECRET_KEY'),
             'Content-Type' => 'application/json'
         ];
     }

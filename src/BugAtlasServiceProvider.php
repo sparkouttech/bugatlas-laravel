@@ -99,7 +99,7 @@ class BugAtlasServiceProvider extends ServiceProvider
             "response_message" => "Project created successfully",
             "protocol" => $logDetails["protocol"],
             "payload" => "Payload",
-            "tag" => config('bugatlas.tag'),
+            "tag" => env('TAG'),
             "meta" => [
                 "host_name" => gethostname(),
                 "path" => $logDetails["path"],
