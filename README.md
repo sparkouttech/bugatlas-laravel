@@ -14,6 +14,13 @@ You can install the package via composer:
 composer require sparkouttech/bug-atlas
 ```
 
+Configure .env variables:
+```
+API_KEY=
+SECRET_KEY=
+TAG=
+```
+
 ## Usage
 
 ```php
