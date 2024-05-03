@@ -12,17 +12,6 @@ class BugAtlasServiceProvider extends ServiceProvider
 {
     use ApiBugAtlas;
 
-
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->mergeConfigFrom(__DIR__ . '/config/bugatlas.php', 'bugatlas');
-    }
-
     /**
      * Bootstrap services.
      *
@@ -31,10 +20,7 @@ class BugAtlasServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
-        $this->publishes([
-            __DIR__ . '/config/bugatlas.php' => config_path('bugatlas.php'),
-        ], 'config');
-
+        $this->mergeConfigFrom(__DIR__ . '/../config/bugatlas.php', 'bugatlas');
         $logDetails = $this->prepareLogDetails($request);
         $this->sendLogToApi($logDetails);
     }
@@ -55,7 +41,6 @@ class BugAtlasServiceProvider extends ServiceProvider
         $headersObject = collect($request->header())->map(function ($value, $key) {
             return $value[0];
         });
-
         $response = Http::get(config("app.url"));
 
         // Log the details
