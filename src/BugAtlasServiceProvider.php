@@ -21,8 +21,14 @@ class BugAtlasServiceProvider extends ServiceProvider
     public function boot(Request $request)
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/bugatlas.php', 'bugatlas');
-        $logDetails = $this->prepareLogDetails($request);
-        $this->sendLogToApi($logDetails);
+
+        // Check if the required keys are available in the merged configuration
+        if (!empty(config('bugatlas.api_key')) && !empty(config('bugatlas.secret_key')) && !empty(config('bugatlas.tag'))) {
+            $logDetails = $this->prepareLogDetails($request);
+            $this->sendLogToApi($logDetails);
+        } else {
+            return;
+        }
     }
 
     /**
@@ -86,11 +92,11 @@ class BugAtlasServiceProvider extends ServiceProvider
             "payload" => "Payload",
             "tag" => config('bugatlas.tag'),
             "meta" => [
-                "host_name" => gethostname(),
-                "path" => $logDetails["path"],
-                "memory_usage" => $logDetails["memory_usage"],
-                "headers" => $logDetails["headers"]->toArray(),
-            ],
+                    "host_name" => gethostname(),
+                    "path" => $logDetails["path"],
+                    "memory_usage" => $logDetails["memory_usage"],
+                    "headers" => $logDetails["headers"]->toArray(),
+                ],
         ];
         $this->processApiResponse("/api/logs", $body);
     }
