@@ -43,10 +43,7 @@
     "laravel": {
       "providers": [
         "Sparkouttech\\BugAtlas\\BugAtlasServiceProvider"
-      ],
-      "aliases": {
-        "BugAtlas": "Sparkouttech\\BugAtlas\\BugAtlasFacade"
-      }
+      ]
     }
   }
 }
