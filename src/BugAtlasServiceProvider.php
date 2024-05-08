@@ -14,26 +14,29 @@ class BugAtlasServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap services.
-     *
+     * Checks the keys(API key, secret key, or tag) are configured or not. 
+     * If not function returns without further processing.
+     * Otherwise, it proceeds with preparing log details based on the provided request and sends the log details.
      * @param  \Illuminate\Http\Request  $request
-     * @return void
+     * @return bool | void
      */
     public function boot(Request $request)
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/bugatlas.php', 'bugatlas');
+        if (empty(config('bugatlas.api_key')) || empty(config('bugatlas.secret_key')) || empty(config('bugatlas.tag'))) {
+            return;
+        }
         $logDetails = $this->prepareLogDetails($request);
         $this->sendLogToApi($logDetails);
     }
 
     /**
-     * Prepare log details for a given HTTP request.
+     * Prepares log details for HTTP request.
      *
-     * This function extracts relevant details from the request and response
-     * to prepare a log entry. It collects headers, fetches additional data
-     * from the server, and formats them into an array.
+     * Extracts relevant details from request and response,
+     * collects headers, fetches server data, formats into array.
      *
-     * @param Request $request The HTTP request object containing request details.
-     * @return array An array containing various details for logging.
+     * @param \Illuminate\Http\Request $request
+     * @return array 
      */
     private function prepareLogDetails(Request $request)
     {
@@ -43,7 +46,6 @@ class BugAtlasServiceProvider extends ServiceProvider
         });
         $response = Http::get(config("app.url"));
 
-        // Log the details
         return [
             "protocol" => $request->server("SERVER_PROTOCOL"),
             "request_url" => $request->fullUrl(),
@@ -61,13 +63,12 @@ class BugAtlasServiceProvider extends ServiceProvider
     }
 
     /**
-     * Send log details to the API for storage.
+     * Sends log details to API for storage.
      *
-     * This function prepares a structured payload containing various log details
-     * and sends it to the specified API endpoint for storage. It constructs the
-     * payload based on the provided log details and additional metadata.
+     * Prepares payload with log details and metadata,
+     * sends it to specified endpoint for storage.
      *
-     * @param array $logDetails An array containing various log details to be sent to the API.
+     * @param array $logDetails
      * @return void
      */
     private function sendLogToApi($logDetails)
