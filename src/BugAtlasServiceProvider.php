@@ -22,6 +22,7 @@ class BugAtlasServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/bugatlas.php', 'bugatlas');
         if (empty(config('bugatlas.api_key')) || empty(config('bugatlas.secret_key')) || empty(config('bugatlas.tag'))) {
             return;
         }
