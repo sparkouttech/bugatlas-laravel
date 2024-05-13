@@ -15,13 +15,15 @@ composer require sparkouttech/bug-atlas
 ```
 Configure .env variables:
 
-```BUGATLAS_API_KEY=
+```bash
+BUGATLAS_API_KEY=
 BUGATLAS_SECRET_KEY=
-BUGATLAS_TAG=```
+BUGATLAS_TAG=
+```
 
 ## Usage
 
-```php
+```bash
  This module reporting a exceptions and errors to an API.
 ```
 
