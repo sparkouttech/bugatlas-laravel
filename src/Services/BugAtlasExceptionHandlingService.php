@@ -48,12 +48,13 @@ class BugAtlasExceptionHandlingService extends BaseHandler
     /**
     * Determine if the exception should be handled by BugAtlas.
     *
-    * @param \Throwable $exception
-    * @return bool
+    * @param \Throwable $exception The exception to be evaluated
+    * @return bool Returns true if the exception should be handled by BugAtlas, otherwise false
     */
 
     protected function shouldHandleException(Throwable $exception): bool
     {
+        // handle exceptions by BugAtlas
         return true;
     }
 }

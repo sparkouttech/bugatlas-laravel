@@ -13,8 +13,10 @@ class BugAtlasExceptionServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind('Illuminate\Contracts\Debug\ExceptionHandler', function ($app) {
-            return new BugAtlasExceptionHandlingService($app, new BugAtlasReporterService());
+        // Bind the BugAtlasExceptionHandlingService to the ExceptionHandler interface
+        $this->app->bind('Illuminate\Contracts\Debug\ExceptionHandler', function () {
+            // Return a new instance of BugAtlasExceptionHandlingService, injecting a new BugAtlasReporterService instance
+            return new BugAtlasExceptionHandlingService(new BugAtlasReporterService());
         });
     }
 }
