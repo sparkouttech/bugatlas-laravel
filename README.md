@@ -13,11 +13,16 @@ You can install the package via composer:
 ```bash
 composer require sparkouttech/bug-atlas
 ```
+Configure .env variables:
+
+```BUGATLAS_API_KEY=
+BUGATLAS_SECRET_KEY=
+BUGATLAS_TAG=```
 
 ## Usage
 
 ```php
-// Usage description here
+ This module reporting a exceptions and errors to an API.
 ```
 
 ### Testing
