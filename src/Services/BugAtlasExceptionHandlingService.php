@@ -13,16 +13,12 @@ class BugAtlasExceptionHandlingService extends BaseHandler
     /**
     * Create a new BugAtlasExceptionHandlingService instance.
     *
-    * @param mixed $app
     * @param \Sparkouttech\BugAtlas\Services\BugAtlasReporterService $bugAtlasReporter
     * @return void
     */
 
-    public function __construct($app, BugAtlasReporterService $bugAtlasReporter)
+    public function __construct(BugAtlasReporterService $bugAtlasReporter)
     {
-        // Call the parent constructor
-        parent::__construct($app);
-
         // Inject the BugAtlasReporterService instance
         $this->bugAtlasReporter = $bugAtlasReporter;
     }
