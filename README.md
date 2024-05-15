@@ -20,18 +20,10 @@ BUGATLAS_API_KEY=
 BUGATLAS_SECRET_KEY=
 BUGATLAS_TAG=
 ```
-
-Configure .env variables:
-```
-API_KEY=
-SECRET_KEY=
-TAG=
-```
-
 ## Usage
 
-```bash
- This module reporting a exceptions and errors to an API.
+```php
+// Usage description here
 ```
 
 ### Testing

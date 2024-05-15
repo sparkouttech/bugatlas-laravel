@@ -17,9 +17,9 @@ trait ApiBugAtlas
      * @param array $payload payload to send with the request.
      * @return \Illuminate\Http\Client\Response 
      */
-    public function processApiResponse($endPoint, $body)
+    public function processApiResponse($endPoint, $payload)
     {
-         return Http::withHeaders($this->getApiHeaders())->post($this->baseURL . $endPoint, $body);
+         return Http::withHeaders($this->getApiHeaders())->post($this->baseURL . $endPoint, $payload);
     }
 
 

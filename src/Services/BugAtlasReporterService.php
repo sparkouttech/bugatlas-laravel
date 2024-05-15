@@ -10,18 +10,20 @@ class BugAtlasReporterService
 {
     use ApiBugAtlas;
 
-    /**
-    * Report an exception to the BugAtlas service.
-    *
-    * @param \Illuminate\Http\Request $request
-    * @param \Throwable $exception
-    * @return void
-    */
+   /**
+     * Report an exception to the BugAtlas service.
+     *
+     * This method constructs a payload containing information about the request, exception,
+     * and other relevant metadata, then sends it to the BugAtlas service via an API call.
+     *
+     * @param mixed $request The request object contabodyg information about the HTTP request.
+     * @param Throwable $exception The exception object representing the error that occurred.
+     * @return void
+     */
 
     public function report($request, Throwable $exception): void
     {
-        // Construct the payload to be sent to BugAtlas
-        $body = [
+        $payload = [
             "request_url" => $request->fullUrl(),
             "request_method" => $request->method(),
             "payload" => json_encode($request->all()),
@@ -33,7 +35,6 @@ class BugAtlasReporterService
                 "stacktrace" => $exception->getTraceAsString(),
             ]
         ];
-        // Send the payload to the BugAtlas API
-        $this->processApiResponse("/api/errors", $body);
+        $this->processApiResponse("/api/errors", $payload);
     }
 }
