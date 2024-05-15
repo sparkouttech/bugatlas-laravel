@@ -10,6 +10,9 @@ class BugAtlasExceptionServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap services.
+     *
+     * Checks for BugAtlas configuration and binds BugAtlasExceptionHandlingService
+     * to Illuminate\Contracts\Debug\ExceptionHandler if configuration is present.
      */
     public function boot(): void
     {

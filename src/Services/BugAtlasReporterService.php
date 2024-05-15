@@ -10,14 +10,13 @@ class BugAtlasReporterService
 {
     use ApiBugAtlas;
 
-   /**
-     * Report an exception to the BugAtlas service.
+    /**
+     * Reports exception to BugAtlas.
      *
-     * This method constructs a payload containing information about the request, exception,
-     * and other relevant metadata, then sends it to the BugAtlas service via an API call.
+     * Sends request and exception details to BugAtlas API.
      *
-     * @param mixed $request The request object contabodyg information about the HTTP request.
-     * @param Throwable $exception The exception object representing the error that occurred.
+     * @param mixed $request The HTTP request
+     * @param \Throwable $exception The exception to report
      * @return void
      */
 

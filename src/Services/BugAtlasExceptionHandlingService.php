@@ -11,46 +11,31 @@ class BugAtlasExceptionHandlingService extends BaseHandler
     protected $bugAtlasReporter;
 
     /**
-    * Create a new BugAtlasExceptionHandlingService instance.
-    *
-    * @param \Sparkouttech\BugAtlas\Services\BugAtlasReporterService $bugAtlasReporter
-    * @return void
-    */
+     * Constructs a new instance of the class.
+     *
+     * Initializes the BugAtlas reporter service.
+     *
+     * @param BugAtlasReporterService $bugAtlasReporter The BugAtlas reporter service
+     */
 
     public function __construct(BugAtlasReporterService $bugAtlasReporter)
     {
-        // Inject the BugAtlasReporterService instance
         $this->bugAtlasReporter = $bugAtlasReporter;
     }
 
     /**
      * Render an exception into an HTTP response.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param \Throwable $exception
-     * @return \Symfony\Component\HttpFoundation\Response
+     * Reports the exception to BugAtlas if it should be handled.
+     *
+     * @param \Illuminate\Http\Request $request The HTTP request
+     * @param \Throwable $exception The exception to be rendered
+     * @return \Symfony\Component\HttpFoundation\Response The HTTP response
      */
 
     public function render($request, Throwable $exception)
     {
-        // Check if the exception should be handled by BugAtlas
-        if ($this->shouldHandleException($exception)) {
-            // Report the exception to BugAtlas for monitoring and debugging purposes
-            $this->bugAtlasReporter->report($request, $exception);
-        }
+        $this->bugAtlasReporter->report($request, $exception);
         return parent::render($request, $exception);
-    }
-
-    /**
-    * Determine if the exception should be handled by BugAtlas.
-    *
-    * @param \Throwable $exception The exception to be evaluated
-    * @return bool Returns true if the exception should be handled by BugAtlas, otherwise false
-    */
-
-    protected function shouldHandleException(Throwable $exception): bool
-    {
-        // handle exceptions by BugAtlas
-        return true;
     }
 }
