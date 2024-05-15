@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Http;
 trait ApiBugAtlas
 {
 
-  
+
     private $baseURL = 'https://api.bugatlas.com/v1';
 
     /**
@@ -19,7 +19,7 @@ trait ApiBugAtlas
      */
     public function processApiResponse($endPoint, $payload)
     {
-         return Http::withHeaders($this->getApiHeaders())->post($this->baseURL . $endPoint, $payload);
+        return Http::withHeaders($this->getApiHeaders())->post($this->baseURL . $endPoint, $payload);
     }
 
 
